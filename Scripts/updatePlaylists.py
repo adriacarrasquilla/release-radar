@@ -103,7 +103,7 @@ def uploadTracksToPlaylist(playlistID, tracks):
     :param tracks: list of track ids
     :return:
     """
-    scope = 'playlist-modify-public'
+    scope = 'playlist-modify-private playlist-modify-public'
     try:
         token = util.prompt_for_user_token(username, scope)
     except:
@@ -178,7 +178,7 @@ if __name__ == "__main__":
 
     for p in updatePlaylists:
         print("Updating %s playlist...\n" % p['name'])
-        new_tracks = getNewTracks('Artists/%s.csv' % p['name'])
+        new_tracks = getNewTracks('../Artists/%s.csv' % p['name'])
         uploadTracksToPlaylist(p['id'], new_tracks)
         print("DONE\n")
 
