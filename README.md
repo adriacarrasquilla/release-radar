@@ -75,7 +75,7 @@ python getArtists.py -n 'MainPlaylist' -m 'IDAux1 playlistAux1 IDAux2 playlistAu
 This is the main script that will search for new released tracks and update them to the specified playlist.
 
 ```
-Option    GNU long option 	Meaning
+Option      GNU long option     Meaning
 -h          --help            Show this message
 -a          --all             Update all playlists
 -p <str>    --playlist 		    Update specific playlists by name.
