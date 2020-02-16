@@ -30,7 +30,7 @@ Variables:
 ```python
 [{'name': 'PlaylistToUpdate', 'id': 'PlaylistID'}, ...]
 ```
-* `playlistsNames` : Python list containing only the name of all playlists to update names. __IMPORTANT:__ Make sure the playlist name is the same as the *playlist.csv* file name explained in the following section. 
+* `playlistsNames` : Python list containing only the name of all playlists to update names. __IMPORTANT:__ Make sure the playlist name is the same as the *playlist.csv* file name explained in the following section.
 ```python
 ['PlaylistToUpdate1', 'PlaylistToUpdate2', ...]
 ```
@@ -82,13 +82,13 @@ Option      GNU long option     Meaning
 ```
 #### Examples
 
-__Update all playlists specified on secret.py__
+Update all playlists specified on secret.py
 
 ```
 python updatePlaylists.py -a
 ```
 
-__Update only p1, p2 and p3 (if exist in playlists from secret.py)__
+Update only p1, p2 and p3 (if exist in playlists from secret.py)
 
 ```
 python updatePlaylists.py -p "p1 p2 p3"
