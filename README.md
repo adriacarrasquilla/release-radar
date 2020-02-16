@@ -48,10 +48,10 @@ Usage:
 
 ```
 Option     GNU long option    Meaning
--h 		     --help             Show this message
--i 		     --id               Id of the playlist to read from
--n 		     --name             Name of the playlist. Will save a csv with this name
--m <str>  --merge             Given a name, update that list with new playlists 'id1 name1 ...'
+-h    --help             Show this message
+-i    --id               Id of the playlist to read from
+-n    --name             Name of the playlist. Will save a csv with this name
+-m <str>    --merge             Given a name, update that list with new playlists 'id1 name1 ...'
 ```
 
 #### Examples
