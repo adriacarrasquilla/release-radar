@@ -76,8 +76,8 @@ This is the main script that will search for new released tracks and update them
 
 ```
 Option 		GNU long option 	Meaning
--h 		    --help 			      Show this message
--a 		    --all 			      Update all playlists
+-h 		  --help 			        Show this message
+-a 		  --all 			        Update all playlists
 -p <str>	--playlist 		    Update specific playlists by name.
 ```
 
