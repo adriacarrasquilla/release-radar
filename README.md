@@ -70,7 +70,7 @@ __Merge MainPlaylist with playlistAux1 and playlistAux2__
 python getArtists.py -n 'MainPlaylist' -m 'IDAux1 playlistAux1 IDAux2 playlistAux2'
 ```
 
-### UpdatePlaylist
+### UpdatePlaylists
 
 This is the main script that will search for new released tracks and update them to the specified playlist.
 
@@ -80,8 +80,30 @@ Option      GNU long option     Meaning
 -a          --all               Update all playlists
 -p <str>    --playlist          Update specific playlists by name.
 ```
+#### Examples
 
-Steps:
-1. Un
-2. Dos
-3. Tres
+__Update all playlists specified on secret.py__
+
+```
+python updatePlaylists.py -a
+```
+
+__Update only p1, p2 and p3 (if exist in playlists from secret.py)__
+
+```
+python updatePlaylists.py -p "p1 p2 p3"
+```
+
+
+#### Script steps
+1. Remove tracks from playlist to update if there is any.
+
+2. For each artist in playlist.csv:
+    1. Get all single/albums
+    2. Sort them by date
+    3. Append to list of album the top 5 newest from that artist
+3. Once all artists have been checked, sort album list by date and limit its length to 100 albums.
+4. For each album in album list, append its track(s) to tracks list.
+5. Return first 50 tracks and upload them to specified playlist.
+
+> Note that steps 2, 3 and 4 use python dictionaries and other techniques to avoid duplicated elements and repetitive tracks (e.g. album full of remixes from same song)
