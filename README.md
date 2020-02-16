@@ -1,6 +1,8 @@
 # Release-Radar
 
-Script that generates a spotify playlist with the latests songs released from a list of artists.
+Environment for an automatic Spotify playlist that uploads periodically the top 50 newest tracks from a dataset of artists.
+
+It can be used from a genre release radar to a custom made artist dataset radar.
 
 
 ## Usage
@@ -11,7 +13,7 @@ This script uses Spotipy library as main resource to connect with Spotify's API.
 In order to use its features, a developer account is required. If you don't have one, access here to upgrade your account (free) or create it from 0: https://developer.spotify.com
 
 ### Secret
-Secret.py contains information about your account so the script is able to run properly according your configuration. It __must__ be edited to make it work.
+Secret.py contains information about your account so the script is able to run properly according your configuration. It __must__ be filled with your own credentials to make it work.
 
 Variables:
 
@@ -71,3 +73,15 @@ python getArtists.py -n 'MainPlaylist' -m 'IDAux1 playlistAux1 IDAux2 playlistAu
 ### UpdatePlaylist
 
 This is the main script that will search for new released tracks and update them to the specified playlist.
+
+```
+Option 		GNU long option 	Meaning
+-h 		    --help 			      Show this message
+-a 		    --all 			      Update all playlists
+-p <str>	--playlist 		    Update specific playlists by name.
+```
+
+Steps:
+1. Un
+2. Dos
+3. Tres
