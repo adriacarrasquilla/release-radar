@@ -30,7 +30,7 @@ Variables:
 ```python
 [{'name': 'PlaylistToUpdate', 'id': 'PlaylistID'}, ...]
 ```
-* `playlistsNames` : Python list containing only the name of all playlists to update names.
+* `playlistsNames` : Python list containing only the name of all playlists to update names. __IMPORTANT:__ Make sure the playlist name is the same as the *playlist.csv* file name explained in the following section. 
 ```python
 ['PlaylistToUpdate1', 'PlaylistToUpdate2', ...]
 ```
