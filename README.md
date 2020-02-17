@@ -107,3 +107,6 @@ python updatePlaylists.py -p "p1 p2 p3"
 5. Return first 50 tracks and upload them to specified playlist.
 
 > Note that steps 2, 3 and 4 use python dictionaries and other techniques to avoid duplicated elements and repetitive tracks (e.g. album full of remixes from same song)
+
+#### Make it run periodically with crontab
+You can use any job scheduler to update daily, weekly, monthly or any period of your interest so your playlist is always up to date (instead of running the command every single time). For unix users, crontab is a quite simple option.
