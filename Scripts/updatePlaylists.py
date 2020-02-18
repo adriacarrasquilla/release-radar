@@ -168,7 +168,6 @@ if __name__ == "__main__":
     os.environ["SPOTIPY_CLIENT_ID"] = secret.client_id
     os.environ["SPOTIPY_CLIENT_SECRET"] = secret.client_secret
     os.environ["SPOTIPY_REDIRECT_URI"] = secret.redirect_uri
-    #os.chdir('/Users/Adria/Documents/SpotyRadar/')
 
     updatePlaylists = argParse(sys.argv)
 
