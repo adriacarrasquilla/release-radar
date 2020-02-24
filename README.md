@@ -46,6 +46,8 @@ Artist name is stored in order to ease manual edits of the file.
 
 Getting this information manually can be quite tedious. In order to speed things up we can use getArtists.py. This script saves all artists that appear on a playlist into a csv file following the same rules from above.
 
+__NOTE:__ Don't end file with empty line, the main script main crash. Also, non utf-8 characters are not allowed.
+
 Usage:
 
 ```
