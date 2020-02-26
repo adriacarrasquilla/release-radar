@@ -46,6 +46,8 @@ Artist name is stored in order to ease manual edits of the file.
 
 Getting this information manually can be quite tedious. In order to speed things up we can use getArtists.py. This script saves all artists that appear on a playlist into a csv file following the same rules from above.
 
+__NOTE:__ Don't end file with empty line, the main script main crash. Also, non utf-8 characters are not allowed.
+
 Usage:
 
 ```
@@ -61,13 +63,13 @@ Option     GNU long option    Meaning
 __Create playlistName from playlist with specified ID__
 
 ```
-python getArtists.py -i 'PlaylistID' -n 'PlaylistName'
+python getArtists.py -i PlaylistID -n PlaylistName
 ```
 
 __Merge MainPlaylist with playlistAux1 and playlistAux2__
 
 ```
-python getArtists.py -n 'MainPlaylist' -m 'IDAux1 playlistAux1 IDAux2 playlistAux2'
+python getArtists.py -n MainPlaylist -m 'IDAux1 playlistAux1 IDAux2 playlistAux2'
 ```
 
 ### UpdatePlaylists
@@ -107,3 +109,6 @@ python updatePlaylists.py -p "p1 p2 p3"
 5. Return first 50 tracks and upload them to specified playlist.
 
 > Note that steps 2, 3 and 4 use python dictionaries and other techniques to avoid duplicated elements and repetitive tracks (e.g. album full of remixes from same song)
+
+#### Make it run periodically with crontab
+You can use any job scheduler to update daily, weekly, monthly or any period of your interest so your playlist is always up to date (instead of running the command every single time). For unix users, crontab is a quite simple option.
