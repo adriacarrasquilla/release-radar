@@ -91,7 +91,8 @@ def removeTracksFromPlaylist(playlistID, spotify):
     tracks = spotify.user_playlist(username, playlistID, fields='tracks')['tracks']['items']
     removeTracks = []
     for tr in tracks:
-        removeTracks.append(tr['track']['id'])
+        if tr['track'] != None:
+            removeTracks.append(tr['track']['id'])
 
     remove = spotify.user_playlist_remove_all_occurrences_of_tracks(username, playlistID, removeTracks)
 
