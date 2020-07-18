@@ -14,14 +14,19 @@ from spotipy.oauth2 import SpotifyClientCredentials
 # GLOBALS
 
 username = secret.username
-playlists = secret.playlists
-playlistsNames = secret.playlistsNames
 
-helptxt = "Usage: python updatePlaylists [OPTIONS] [PLAYLISTS]...\n\n"\
-		  "Option 		GNU long option 	Meaning\n" \
- 		  "-h 		--help 			Show this message\n" \
- 		  "-a 		--all 			Update all playlists\n" \
- 		  "-p <str>	--playlist 		Update specific playlists by name.\n"
+playlists = [{'name': 'hardstyle', 'id': '2m7IlNkYjwT69uIhOyYLMi'},
+             {'name': 'tech-house', 'id': '6ujpImBo1z4YfWHK7oiiTD'},
+             {'name': 'hardcore', 'id': '1wWcVDacL95OpUb4oHUZpD'},
+             {'name': 'techno', 'id': '0HILYg2jeV6mOYiXBw125R'},
+             {'name': 'merda', 'id': '67ctnFOT7EIHdfrzrzVWqX'},
+             {'name': 'chill', 'id': '2yXIvGjxSR2BqL1UZRinIm'},
+             {'name': 'trap', 'id': '3pWw2pJgEu8AEXWit9Nw3x'},
+             {'name': 'acoustic', 'id': '3mWAb5gVnxOLZqG5GgLeM6'}]
+
+playlistsNames = ['hardstyle', 'tech-house', 'hardcore', 'techno', 'merda', 'chill', 'trap', 'acoustic']
+
+helptxt = "HELP"
 
 
 def getTracksFromAlbum(albumID, sp):
@@ -33,16 +38,19 @@ def getTracksFromAlbum(albumID, sp):
     tracks = sp.album_tracks(albumID)
     trackIDs = []
     trackNames = []
+    trackArtists = []
     for track in tracks['items']:
         if len(trackNames) == 0:
             trackIDs.append(track['id'])
             trackNames.append(track['name'].split(" - ")[0])
+            trackArtists.append(track['artists'][0]['name'])
         else:
             if track['name'].split(" - ")[0] not in trackNames:
                 trackIDs.append(track['id'])
                 trackNames.append(track['name'].split(" - ")[0])
+                trackArtists.append(track['artists'][0]['name'])
 
-    return trackIDs, trackNames
+    return trackIDs, trackNames, trackArtists
 
 
 def getNewTracks(artists):
@@ -77,11 +85,17 @@ def getNewTracks(artists):
     newAlbumsFiltered = list(dict.fromkeys(newAlbums[:, 1]))
 
     newTracksDict = {}
+    nameNewTracksDict = {}
     print('Sorting and selecting tracks.')
     for album in newAlbumsFiltered[:100]:
-        trackID, trackName = getTracksFromAlbum(album, spotify)
+        trackID, trackName, trackArtist = getTracksFromAlbum(album, spotify)
         for i in range(len(trackID)):
             newTracksDict[trackName[i][:10]] = trackID[i]
+            nameNewTracksDict[trackName[i][:10]] = trackName[i] + " - " + trackArtist[i]
+
+    print("TRACKS IN QUEUE:")
+    for song in list(nameNewTracksDict.values())[:50]:
+        print(song)
 
     return list(newTracksDict.values())[:50]
 
@@ -92,7 +106,7 @@ def removeTracksFromPlaylist(playlistID, spotify):
     removeTracks = []
     for tr in tracks:
         if tr['track'] != None:
-            removeTracks.append(tr['track']['id'])
+        	removeTracks.append(tr['track']['id'])
 
     remove = spotify.user_playlist_remove_all_occurrences_of_tracks(username, playlistID, removeTracks)
 
@@ -104,7 +118,7 @@ def uploadTracksToPlaylist(playlistID, tracks):
     :param tracks: list of track ids
     :return:
     """
-    scope = 'playlist-modify-private playlist-modify-public'
+    scope = 'playlist-modify-public'
     try:
         token = util.prompt_for_user_token(username, scope)
     except:
@@ -118,7 +132,10 @@ def uploadTracksToPlaylist(playlistID, tracks):
 
     print("Uploading new tracks to playlist.")
     for track in tracks:
-        results = spotify.user_playlist_add_tracks(username, playlistID, [track])
+        try:
+            results = spotify.user_playlist_add_tracks(username, playlistID, [track])
+        except:
+            print(f"Error uploading track: {track}")
     print("%s tracks added.\n" % len(tracks))
 
 
@@ -169,6 +186,7 @@ if __name__ == "__main__":
     os.environ["SPOTIPY_CLIENT_ID"] = secret.client_id
     os.environ["SPOTIPY_CLIENT_SECRET"] = secret.client_secret
     os.environ["SPOTIPY_REDIRECT_URI"] = secret.redirect_uri
+    os.chdir('/Users/Adria/Documents/SpotyRadar/')
 
     updatePlaylists = argParse(sys.argv)
 
@@ -178,9 +196,7 @@ if __name__ == "__main__":
 
     for p in updatePlaylists:
         print("Updating %s playlist...\n" % p['name'])
-        new_tracks = getNewTracks('../Artists/%s.csv' % p['name'])
+        new_tracks = getNewTracks('artistsByGenre/%s.csv' % p['name'])
         uploadTracksToPlaylist(p['id'], new_tracks)
         print("DONE\n")
-
-
 
