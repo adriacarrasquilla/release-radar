@@ -12,21 +12,15 @@ import spotipy.util as util
 from spotipy.oauth2 import SpotifyClientCredentials
 
 # GLOBALS
-
 username = secret.username
+playlists = secret.playlists
+playlistsNames = secret.playlistsNames
 
-playlists = [{'name': 'hardstyle', 'id': '2m7IlNkYjwT69uIhOyYLMi'},
-             {'name': 'tech-house', 'id': '6ujpImBo1z4YfWHK7oiiTD'},
-             {'name': 'hardcore', 'id': '1wWcVDacL95OpUb4oHUZpD'},
-             {'name': 'techno', 'id': '0HILYg2jeV6mOYiXBw125R'},
-             {'name': 'merda', 'id': '67ctnFOT7EIHdfrzrzVWqX'},
-             {'name': 'chill', 'id': '2yXIvGjxSR2BqL1UZRinIm'},
-             {'name': 'trap', 'id': '3pWw2pJgEu8AEXWit9Nw3x'},
-             {'name': 'acoustic', 'id': '3mWAb5gVnxOLZqG5GgLeM6'}]
-
-playlistsNames = ['hardstyle', 'tech-house', 'hardcore', 'techno', 'merda', 'chill', 'trap', 'acoustic']
-
-helptxt = "HELP"
+helptxt = "Usage: python updatePlaylists [OPTIONS] [PLAYLISTS]...\n\n"\
+		  "Option 		GNU long option 	Meaning\n" \
+ 		  "-h 		--help 			Show this message\n" \
+ 		  "-a 		--all 			Update all playlists\n" \
+ 		  "-p <str>	--playlist 		Update specific playlists by name.\n"
 
 
 def getTracksFromAlbum(albumID, sp):
@@ -186,7 +180,6 @@ if __name__ == "__main__":
     os.environ["SPOTIPY_CLIENT_ID"] = secret.client_id
     os.environ["SPOTIPY_CLIENT_SECRET"] = secret.client_secret
     os.environ["SPOTIPY_REDIRECT_URI"] = secret.redirect_uri
-    os.chdir('/Users/Adria/Documents/SpotyRadar/')
 
     updatePlaylists = argParse(sys.argv)
 
